@@ -1,0 +1,34 @@
+name: Build Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '15.3'
+      
+      - name: Build Release
+        run: |
+          xcodebuild -project mdview.xcodeproj -scheme mdview -configuration Release build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+      
+      - name: Package app
+        run: |
+          mkdir -p releases
+          cp -r build/Release/mdview.app releases/
+          mv mdview.app releases/
+          zip -r releases/mdview-${{ github.event.release.tag_name }}.zip releases/
+      
+      - name: Upload release asset
+        uses: softprops/action-gh-release@v1
+        with:
+          files: releases/mdview-${{ github.event.release.tag_name }}.zip
