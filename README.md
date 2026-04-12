@@ -45,4 +45,4 @@ This project uses [markdown-markdown-ui](https://github.com/gonzalezreal/swift-m
 
 ## License
 
-MIT
+This project is licensed under the GPL v3 License.
