@@ -19,7 +19,7 @@ jobs:
       
       - name: Build Release
         run: |
-          xcodebuild -project mdview.xcodeproj -scheme mdview -configuration Release build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+          xcodebuild -project mdview.xcodeproj -scheme mdview -configuration Release -derivedDataPath build build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
       
       - name: Package app
         run: |
