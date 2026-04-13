@@ -25,7 +25,6 @@ jobs:
         run: |
           mkdir -p releases
           cp -r build/Build/Products/Release/mdview.app releases/
-          mv mdview.app releases/
           zip -r releases/mdview-${{ github.event.release.tag_name }}.zip releases/
       
       - name: Upload release asset
